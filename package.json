@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "karma test"
+    "test": "karma start"
   },
   "author": "",
   "license": "ISC",
