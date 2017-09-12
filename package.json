@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "karma start"
+    "test": "karma start",
+    "serve": "ws"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "karma-chrome-launcher": "^2.2.0",
     "karma-jasmine": "^1.1.0",
     "karma-webpack": "^2.0.4",
+    "local-web-server": "^2.2.4",
     "webpack": "^3.5.6"
   }
 }

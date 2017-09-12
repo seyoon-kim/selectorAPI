@@ -1,32 +1,29 @@
-
-
-// getElementsByClassName*() IE 8 이하 버전 호환
-var getElementsByClassNamePolyfil = function(rootEle, selector) {
-    var allElements;
-    var result;
-    var rClasName;
-    var i;
-    var allElementsLength;
-
-    if (document.getElementsByClassName) {
-        return rootEle.getElementsByClassName(selector);
-    }
-
-    allElements = rootEle.getElementsByTagName('*');
-    rClasName = new RegExp(selector);
-
-    i = 0;
-    allElementsLength = allElements.length;
-    for (i; i < allElementsLength; i += 1) {
-        if (rClasName.test(allElements[i].className)) {
-            result.push(allElements[i]);
-        }
-    }
-
-    return result;
-};
-
 var Domutil = (function() {
+    // getElementsByClassName*() IE 8 이하 버전 호환
+    var _getElementsByClassNamePolyfill = function(rootEle, selector) {
+        var allElements;
+        var result;
+        var rClasName;
+        var i;
+        var allElementsLength;
+
+        if (document.getElementsByClassName) {
+            return rootEle.getElementsByClassName(selector);
+        }
+
+        allElements = rootEle.getElementsByTagName('*');
+        rClasName = new RegExp(selector);
+
+        i = 0;
+        allElementsLength = allElements.length;
+        for (i; i < allElementsLength; i += 1) {
+            if (rClasName.test(allElements[i].className)) {
+                result.push(allElements[i]);
+            }
+        }
+
+        return result;
+    };
     /*
      * 1. selector의 앞에 문자열에 따라 id, class, tagName을 구별하여 해당하는 엘리멘트들의 배열을 반환하는 함수
      * 2. rootEle, selector 두 개의 인자를 받는다. rootEle는 이전에 받은 결과값으로서 해당 값으로 다시 다음번째의 selector 값을 이용하여 값을 찾을때 사용한다.
@@ -38,7 +35,7 @@ var Domutil = (function() {
 
         if (rClasName.test(selectors)) {
             selectors = selectors.replace(rClasName, '');
-            result = getElementsByClassNamePolyfil(rootEle, selectors);
+            result = _getElementsByClassNamePolyfill(rootEle, selectors);
             result = Array.prototype.slice.call(result);
         } else if (rIdName.test(selectors)) {
             selectors = selectors.replace(rIdName, '');
