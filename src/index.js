@@ -53,11 +53,44 @@ var Domutil = (function() {
         return result;
     };
 
+    // from에 있는 요소 중에 중복되어 있는 요소를 제거한 배열을 반환
+    var _removeSameElement = function(from) {
+        var temp = [];
+        var x;
+        var y;
+        var count;
+        var fromLength;
+        var tempLength;
+
+        x = 0;
+        fromLength = from.length;
+        for (x; x < fromLength; x += 1) {
+            if (x === 0) {
+                temp.push(from[0]);
+            } else {
+                count = 0;
+                y = 0;
+                tempLength = temp.length;
+                for (y; y < tempLength; y += 1) {
+                    if (temp[y] === from[x]) {
+                        count += 1;
+                    }
+                }
+                if (count === 0) {
+                    temp.push(from[x]);
+                }
+            }
+        }
+
+        return temp;
+    };
+
     // selector를 만족 시키는 요소들을 담은 배열을 생성하여 반환
     var _makeArrayMatchingToSelctor = function(selectors) {
         var founded; // founded, from 중에서 arrSeletor의 원소에 해당하는 결과를 저장하는 값
         var from; // from, 찾아야 하는 대상이 되는 엘리멘트
         var arrSeletor; // arrSeletor, 무엇을 찾아야 하는지 알려주는 값
+        var result = [];
         var i;
         var j;
         var arrSeletorLength;
@@ -79,11 +112,14 @@ var Domutil = (function() {
             for (j; j < fromLength; j += 1) {
                 founded = founded.concat(_findElementsOfMatchingSelector(from[j], arrSeletor[i]));
             }
+
             from = founded;
             founded = [];
         }
 
-        return from;
+        result = _removeSameElement(from);
+
+        return result;
     };
 
     var querySelector = function(selectors) {

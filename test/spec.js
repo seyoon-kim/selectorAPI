@@ -28,6 +28,12 @@ describe('Domutil.querySelector function should be return array ', function() {
         expect(Domutil.querySelector('.main div').length).toBe(1);
     });
 
+    // 셀렉터가 두 개인 경우, .main #cont의 해당하는 엘레멘트 배열을 반환
+    it('if selector is (.className #idName), should be return array .className tagName element', function() {
+        document.body.innerHTML = '<div class="main">no main</div><div class="main"><div id="cont">.main div</div></div>';
+        expect(Domutil.querySelector('.main #cont').length).toBe(1);
+    });
+
     // 셀렉터가 세 개인 경우, .#cont div span의 해당하는 엘레멘트 배열을 반환
     it('if selector is (#id tagName tagName), should be return array #id tagName tagName', function() {
         document.body.innerHTML = '<div id="cont" class="main"><div><span>no main</span></div></div><div class="main"><div><span>.main</span> div</div></div>';
@@ -81,6 +87,12 @@ describe('Domutil.querySelectorAll function should be return array ', function()
     it('if selector is (.className tagName tagName), should be return array .className tagName tagName element', function() {
         document.body.innerHTML = '<div id="cont" class="main"><div><span>no main</span></div></div> <div class="main"><div><span>.main</span></div></div>';
         expect(Domutil.querySelectorAll('.main div span').length).toBe(2);
+    });
+
+    // 셀렉터가 두 개인 경우, div li의 해당하는 엘레멘트 배열을 반환
+    it('if selector is (tagName tagName), should be return array tagNam tagName element', function() {
+        document.body.innerHTML = '<div class="wrap">div.Wrap<div class="area">div.area<p id="title">p#title</p><ul class="list"><li>li01</li><li>li02</li></ul><ul class="list"><li>li03</li><li>li04<p>p</p></li></ul></div><div class="area">div.area<div class="box" id="boxSection">div.box<span id="date">#date</span><ol class="list"><li id="first">li05</li><li>li06</li><li>li07</li></ol></div></div></div>'
+        expect(Domutil.querySelectorAll('div li').length).toBe(7);
     });
 });
 
