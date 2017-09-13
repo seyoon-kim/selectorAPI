@@ -39,7 +39,7 @@ var Domutil = (function() {
             result = Array.prototype.slice.call(result);
         } else if (rIdName.test(selectors)) {
             selectors = selectors.replace(rIdName, '');
-            result = rootEle.getElementById(selectors);
+            result = document.getElementById(selectors);
             result = [result];
         } else {
             result = rootEle.getElementsByTagName(selectors);
