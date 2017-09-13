@@ -2,8 +2,8 @@ var Domutil = (function() {
     // getElementsByClassName*() IE 8 이하 버전 호환
     var _getElementsByClassNamePolyfill = function(rootEle, selector) {
         var allElements;
-        var result;
-        var rClasName;
+        var result = [];
+        var rClassName;
         var i;
         var allElementsLength;
 
@@ -12,12 +12,12 @@ var Domutil = (function() {
         }
 
         allElements = rootEle.getElementsByTagName('*');
-        rClasName = new RegExp(selector);
+        rClassName = new RegExp(selector);
 
         i = 0;
         allElementsLength = allElements.length;
         for (i; i < allElementsLength; i += 1) {
-            if (rClasName.test(allElements[i].className)) {
+            if (rClassName.test(allElements[i].className)) {
                 result.push(allElements[i]);
             }
         }
@@ -29,12 +29,12 @@ var Domutil = (function() {
      * 2. rootEle, selector 두 개의 인자를 받는다. rootEle는 이전에 받은 결과값으로서 해당 값으로 다시 다음번째의 selector 값을 이용하여 값을 찾을때 사용한다.
      */
     var _findElementsOfMatchingSelector = function(rootEle, selectors) {
-        var result;
-        var rClasName = /^\./g;
+        var result = [];
+        var rClassName = /^\./g;
         var rIdName = /^#/g;
 
-        if (rClasName.test(selectors)) {
-            selectors = selectors.replace(rClasName, '');
+        if (rClassName.test(selectors)) {
+            selectors = selectors.replace(rClassName, '');
             result = _getElementsByClassNamePolyfill(rootEle, selectors);
             result = Array.prototype.slice.call(result);
         } else if (rIdName.test(selectors)) {

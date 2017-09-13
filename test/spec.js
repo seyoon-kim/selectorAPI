@@ -84,9 +84,34 @@ describe('Domutil.querySelectorAll function should be return array ', function()
     });
 });
 
-xdescribe('getElementsByClassName Pollyfil', function() {
+describe('getElementsByClassName Pollyfil', function() {
+    var _getElementsByClassNamePolyfill = function(rootEle, selector) {
+        var allElements;
+        var result = [];
+        var rClassName;
+        var i;
+        var allElementsLength;
+
+        if (document.getElementsByClassName) {
+            return rootEle.getElementsByClassName(selector);
+        }
+
+        allElements = rootEle.getElementsByTagName('*');
+        rClassName = new RegExp(selector);
+
+        i = 0;
+        allElementsLength = allElements.length;
+        for (i; i < allElementsLength; i += 1) {
+            if (rClassName.test(allElements[i].className)) {
+                result.push(allElements[i]);
+            }
+        }
+
+        return result;
+    };
+
     it('Should be return main class elements', function() {
         document.body.innerHTML = '<div id="cont" class="main"><div><span>no main</span></div></div> <div class="main"><div><span>.main</span></div></div>';
-        expect(getElementsByClassNamePolyfil(document, 'main').length).toBe(2);
+        expect(_getElementsByClassNamePolyfill(document, 'main').length).toBe(2);
     });
 });
