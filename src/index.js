@@ -40,7 +40,11 @@ var Domutil = (function() {
         } else if (rIdName.test(selectors)) {
             selectors = selectors.replace(rIdName, '');
             result = document.getElementById(selectors);
-            result = [result];
+            if (result === null) {
+                result = [];
+            } else {
+                result = [result];
+            }
         } else {
             result = rootEle.getElementsByTagName(selectors);
             result = Array.prototype.slice.call(result);
