@@ -50,7 +50,7 @@ describe('Domutil.querySelector function should be return array ', function() {
 describe('Domutil.querySelectorAll function should be return array ', function() {
     // Selector API 요구조건, 배열을 반환해야 한다 테스트 케이스 작성
     it('should be return array', function() {
-        expect(Domutil.querySelectorAll()).toEqual([]);
+        expect(Domutil.querySelectorAll()).toEqual(jasmine.any(array));
     });
 
     // 셀렉터가 class인 경우, 해당 class를 가지고 있는 엘리멘트 배열을 반환
