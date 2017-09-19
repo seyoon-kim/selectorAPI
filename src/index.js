@@ -2,6 +2,27 @@ var Domutil = (function() {
     var rMatchedClassName = /^\./g;
     var rMatchedIdName = /^#/g;
 
+    var _toArray = function(likeArray) {
+        var result = [];
+        var i = 0;
+        var likeArrayLength = likeArray.length;
+        for (; i < likeArrayLength; i += 1) {
+            result.push(likeArray[i]);
+        }
+        return result;
+    }
+
+    var _indexOf = function(arr, obj) {
+        var i = 0;
+        var arrLength = arr.length
+        for (var i = 0; i < arrLength; i += 1) {
+            if (arr[i] === obj) {
+                return i;
+            }
+            return -1;
+        }
+    }
+
     // getElementsByClassName*() IE 8 이하 버전 호환
     var _getElementsByClassNamePolyfill = function(rootEle, selector) {
         var result = [];
@@ -11,7 +32,7 @@ var Domutil = (function() {
         var allElementsLength;
 
         if (document.getElementsByClassName) {
-            return [].slice.call(rootEle.getElementsByClassName(selector));
+            return _toArray(rootEle.getElementsByClassName(selector));
         }
 
         allElements = rootEle.getElementsByTagName('*');
@@ -25,7 +46,7 @@ var Domutil = (function() {
             }
         }
 
-        return [].slice.call(result);
+        return result;
     };
 
     /**
@@ -46,7 +67,7 @@ var Domutil = (function() {
             result = (result === null) ? [] : [result];
         } else {
             result = rootEle.getElementsByTagName(selectors);
-            result = Array.prototype.slice.call(result);
+            result = _toArray(result);
         }
 
         return result;
@@ -61,7 +82,7 @@ var Domutil = (function() {
         for (; numFrom < fromLength; numFrom += 1) {
             if (numFrom === 0) {
                 temp.push(from[0]);
-            } else if (temp.indexOf(from[numFrom]) > -1) {
+            } else if (_indexOf(temp, from[numFrom]) > -1) {
                 break;
             } else {
                 temp.push(from[numFrom]);
