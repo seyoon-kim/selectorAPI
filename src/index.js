@@ -6,22 +6,26 @@ var Domutil = (function() {
         var result = [];
         var i = 0;
         var likeArrayLength = likeArray.length;
+
         for (; i < likeArrayLength; i += 1) {
             result.push(likeArray[i]);
         }
+
         return result;
-    }
+    };
 
     var _indexOf = function(arr, obj) {
         var i = 0;
-        var arrLength = arr.length
-        for (var i = 0; i < arrLength; i += 1) {
+        var arrLength = arr.length;
+
+        for (; i < arrLength; i += 1) {
             if (arr[i] === obj) {
                 return i;
             }
-            return -1;
         }
-    }
+
+        return -1;
+    };
 
     // getElementsByClassName*() IE 8 이하 버전 호환
     var _getElementsByClassNamePolyfill = function(rootEle, selector) {
@@ -96,8 +100,8 @@ var Domutil = (function() {
     var _makeArrayMatchingToSelctor = function(selectors) {
         var founded = []; // founded, from 중에서 arrSeletor의 원소에 해당하는 결과를 저장하는 값
         var from = [document]; // from, 찾아야 하는 대상이 되는 엘리멘트
-        var arrSeletor = selectors.split(/\s+/);
         var result = [];
+        var arrSeletor;
         var numArrSelector;
         var numFrom;
         var arrSeletorLength;
@@ -107,6 +111,7 @@ var Domutil = (function() {
             return [];
         }
 
+        arrSeletor = selectors.split(/\s+/);
         numArrSelector = 0;
         arrSeletorLength = arrSeletor.length;
         for (; numArrSelector < arrSeletorLength; numArrSelector += 1) {
