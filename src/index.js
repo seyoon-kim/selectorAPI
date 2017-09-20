@@ -1,6 +1,4 @@
 var Domutil = (function() {
-    var rMatchedClassName = /^\./g;
-    var rMatchedIdName = /^#/g;
 
     var _toArray = function(likeArray) {
         var result = [];
@@ -61,6 +59,8 @@ var Domutil = (function() {
      */
     var _findElementsOfMatchingSelector = function(rootEle, selectors) {
         var result = [];
+        var rMatchedClassName = /^\./g;
+        var rMatchedIdName = /^#/g;
 
         if (rMatchedClassName.test(selectors)) {
             selectors = selectors.replace(rMatchedClassName, '');
@@ -119,6 +119,7 @@ var Domutil = (function() {
             fromLength = from.length;
             for (; numFrom < fromLength; numFrom += 1) {
                 founded = founded.concat(_findElementsOfMatchingSelector(from[numFrom], arrSeletor[numArrSelector]));
+                //console.log(founded)
             }
 
             from = founded;
